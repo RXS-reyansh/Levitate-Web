@@ -1,0 +1,65 @@
+import { useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import Marquee from './Marquee';
+import AuroraBackground from './AuroraBackground';
+import TwinkleStars from './TwinkleStars';
+import FloatingEmojis from './FloatingEmojis';
+import AnnouncementBadge from './AnnouncementBadge';
+
+function CursorGlow() {
+  const rawX = useMotionValue(-300);
+  const rawY = useMotionValue(-300);
+  const x    = useSpring(rawX, { stiffness: 90, damping: 22, mass: 0.5 });
+  const y    = useSpring(rawY, { stiffness: 90, damping: 22, mass: 0.5 });
+
+  useEffect(() => {
+    const move = (e: MouseEvent) => { rawX.set(e.clientX); rawY.set(e.clientY); };
+    window.addEventListener('mousemove', move, { passive: true });
+    return () => window.removeEventListener('mousemove', move);
+  }, [rawX, rawY]);
+
+  return (
+    <motion.div
+      style={{
+        x, y,
+        position:       'fixed',
+        top:            0,
+        left:           0,
+        width:          700,
+        height:         700,
+        translateX:     '-50%',
+        translateY:     '-50%',
+        background:     'radial-gradient(circle, hsl(262 70% 73% / 0.065) 0%, transparent 65%)',
+        pointerEvents:  'none',
+        zIndex:         0,
+        willChange:     'transform',
+      }}
+    />
+  );
+}
+
+export default function Layout() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }); }, [pathname]);
+
+  return (
+    <div className="min-h-screen flex flex-col relative">
+      <AuroraBackground />
+      <TwinkleStars />
+      <FloatingEmojis />
+      <CursorGlow />
+      <AnnouncementBadge />
+      <Navbar />
+      <main className="flex-1 pt-24 relative z-10">
+        <Outlet />
+      </main>
+      <div className="relative z-10">
+        <Marquee />
+      </div>
+      <Footer />
+    </div>
+  );
+}
