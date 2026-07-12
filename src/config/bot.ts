@@ -27,6 +27,6 @@ export const botConfig = {
   botAvatar: 'https://i.ibb.co/4ZcQkRgH/square-crop-5.jpg',   // e.g. 'https://cdn.discordapp.com/avatars/.../avatar.png'
 
   /* ── Avatars (set to a URL or relative path; leave '' for the default fallback) ── */
-  botAvatar:       'https://i.ibb.co/4ZcQkRgH/square-crop-5.jpg',   // e.g. 'https://cdn.discordapp.com/avatars/.../avatar.png'
+  botAvatar:       'https://i.ibb.co/VWgwtSgc/bot-avatar-duh.jpg',   // e.g. 'https://cdn.discordapp.com/avatars/.../avatar.png'
   developerAvatar: 'https://i.ibb.co/NnyxGwgY/square-crop-3.jpg',   // e.g. '/reyansh.jpg'
 };
