@@ -6,27 +6,25 @@
  */
 
 export const botConfig = {
-  /* ── Identity ─────────────────────────────────────────── */
-  name:        'Levitate',
-  prefix:      '$',
-  tagline:     'Your server, elevated.',
-  description: "A moderation, antinuke, and utility Discord bot built for modern servers. Every response is crafted with Discord's Components V2 ; clean, interactive, and precise.",
+   /* ── Identity ─────────────────────────────────────────── */
+   name: "Levitate",
+   prefix: "$",
+   tagline: "Your server, elevated.",
+   description:
+      "A moderation, antinuke, and utility Discord bot built for modern servers. Every response is crafted with Discord's Components V2 ; clean, interactive, and precise.",
 
-  /* ── Stats ──────────────────────────────────────────────
+   /* ── Stats ──────────────────────────────────────────────
      commandCount is auto-derived in `site.ts` from the real
      commandCategories list — don't hand-edit it here.       */
-  commandCount: 0,
-  uptime:       '99.9%',
+   commandCount: 0,
+   uptime: "99.9%",
 
-  /* ── Links ────────────────────────────────────────────── */
-  inviteUrl:  'https://discord.com/oauth2/authorize?client_id=1520367176756891688&permissions=8&integration_type=0&scope=bot',
-  supportUrl: 'https://discord.gg/YpCfcCTXdv',
-  githubUrl:  'https://github.com/RXS-reyansh/Levitate',
+   /* ── Links ────────────────────────────────────────────── */
+   inviteUrl:
+      "https://discord.com/oauth2/authorize?client_id=1520367176756891688&permissions=8&integration_type=0&scope=bot",
+   supportUrl: "https://discord.gg/YpCfcCTXdv",
+   githubUrl: "https://github.com/RXS-reyansh/Levitate",
 
-  /* ── Avatar (set to a URL or relative path; leave '' for the default fallback) ── */
-  botAvatar: 'https://i.ibb.co/4ZcQkRgH/square-crop-5.jpg',   // e.g. 'https://cdn.discordapp.com/avatars/.../avatar.png'
-
-  /* ── Avatars (set to a URL or relative path; leave '' for the default fallback) ── */
-  botAvatar:       'https://i.ibb.co/VWgwtSgc/bot-avatar-duh.jpg',   // e.g. 'https://cdn.discordapp.com/avatars/.../avatar.png'
-  developerAvatar: 'https://i.ibb.co/NnyxGwgY/square-crop-3.jpg',   // e.g. '/reyansh.jpg'
+   /* ── Avatar (set to a URL or relative path; leave '' for the default fallback) ── */
+   botAvatar: "https://i.ibb.co/VWgwtSgc/bot-avatar-duh.jpg", // e.g. 'https://cdn.discordapp.com/avatars/.../avatar.png'
 };
