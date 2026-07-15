@@ -83,8 +83,36 @@
     font-family: 'Inter', system-ui, sans-serif;
     background-image: var(--gradient-mesh);
     background-attachment: fixed;
+    cursor: url('./assets/cursors/cursor-default.png') 0 0, auto;
   }
 
+  a,
+  button,
+  [role="button"],
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  label[for],
+  select,
+  summary {
+    cursor: url('./assets/cursors/cursor-pointer.png') 0 0, pointer;
+  }
+}
+
+/* Placed in the utilities layer (after @tailwind utilities) so these win over
+   Tailwind's built-in `cursor-default` / `cursor-pointer` utility classes,
+   which otherwise reset elements back to the plain OS arrow. */
+@layer utilities {
+  .cursor-default {
+    cursor: url('./assets/cursors/cursor-default.png') 0 0, auto;
+  }
+
+  .cursor-pointer {
+    cursor: url('./assets/cursors/cursor-pointer.png') 0 0, pointer;
+  }
+}
+
+@layer base {
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Sora', system-ui, sans-serif;
     @apply tracking-tight;

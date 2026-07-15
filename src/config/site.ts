@@ -1,7 +1,7 @@
 import {
-  Shield, Zap, Sparkles, Bell, Music2,
+  Shield, Zap, Sparkles, Bell, Layers,
   MessageSquare, Cake, Star, Swords,
-  Users, Volume2, Heart, Trash2, Server, Bot,
+  Users, Volume2, Heart, Trash2, Server,
 } from 'lucide-react';
 import { botConfig } from './bot';
 import { developerConfig } from './developer';
@@ -73,9 +73,12 @@ export const site = {
       name: 'Info',
       icon: Star,
       commands: [
-        { name: '$help',  aliases: ['h'],         permission: null, description: 'Interactive CV2 help menu with category navigation.',               usage: '$help [category]' },
-        { name: '$ping',  aliases: [],            permission: null, description: 'API latency, WebSocket ping, and database ping.',                  usage: '$ping' },
-        { name: '$debug', aliases: ['botstats'],  permission: null, description: 'Detailed bot stats — clusters, shards, memory, latency, and more.', usage: '$debug' },
+        { name: '$help',      aliases: ['h'],                  permission: null, description: 'Interactive CV2 help menu with category navigation.',               usage: '$help [category]' },
+        { name: '$ping',      aliases: [],                     permission: null, description: 'API latency, WebSocket ping, and database ping.',                   usage: '$ping' },
+        { name: '$debug',     aliases: ['botstats'],           permission: null, description: 'Detailed bot stats — clusters, shards, memory, latency, and more.', usage: '$debug' },
+        { name: '$uptime',    aliases: [],                     permission: null, description: 'Shows how long the bot has been online.',                           usage: '$uptime' },
+        { name: '$developer', aliases: ['dev', 'owner', 'creator'], permission: null, description: 'Info about the developer behind this bot.',              usage: '$developer' },
+        { name: '$host',      aliases: ['hosting', 'hoster'],  permission: null, description: 'Shows where the bot is hosted and other technical details.',        usage: '$host' },
       ],
     },
     {
@@ -95,6 +98,8 @@ export const site = {
         { name: '$lock',           aliases: ['lockchannel'],                        permission: 'Manage Channels',   description: 'Lock a channel — removes Send Messages from @everyone.',        usage: '$lock [#channel]' },
         { name: '$unlock',         aliases: ['unlockchannel'],                      permission: 'Manage Channels',   description: 'Unlock a previously locked channel.',                           usage: '$unlock [#channel]' },
         { name: '$lockdown',       aliases: [],                                     permission: 'Manage Server',     description: 'Lock every text channel in the server. Confirmation required.', usage: '$lockdown\n$lockdown unlock' },
+        { name: '$lockdown-lift', aliases: [],                                     permission: 'Manage Server',     description: 'Slash-only counterpart to /lockdown — unlocks every text channel directly.', usage: '/lockdown-lift [reason]' },
+        { name: '$role',          aliases: [],                                     permission: 'Manage Roles',      description: 'Legacy command — redirects to $roleadd / $roleremove / $roleall. Full add/remove/all behaviour available via /role.', usage: '$role' },
         { name: '$nick',           aliases: ['nickname', 'setnick', 'setnickname'], permission: 'Manage Nicknames',  description: 'Change a member\'s nickname.',                                  usage: '$nick <@user> <nickname>' },
         { name: '$massnick',       aliases: ['massnickname', 'mn'],                 permission: 'Manage Nicknames',  description: 'Change all members\' nicknames (with confirmation).',           usage: '$massnick <nickname>' },
         { name: '$masskick',       aliases: ['mkick'],                              permission: 'Kick Members',      description: 'Kick all members matching criteria (with confirmation).',       usage: '$masskick [filter]' },
@@ -112,9 +117,10 @@ export const site = {
       ],
     },
     {
-      name: 'Antinuke',
+      name: 'Security',
       icon: Swords,
       commands: [
+        { name: '$automod',            aliases: ['am'],                  permission: 'Manage Server', description: 'Interactive CV2 panel to configure automatic message moderation — anti-spam, anti-link, anti-invite, bad words, mass mention, caps, and ping filters.', usage: '$automod' },
         { name: '$antinuke status',    aliases: ['an', 'antinukesetup'], permission: 'Administrator', description: 'View the antinuke master toggle, module count, log channel, and quarantine role.', usage: '$antinuke status' },
         { name: '$antinuke enable',    aliases: ['an', 'antinukesetup'], permission: 'Administrator', description: 'Enable the antinuke system for this server.',               usage: '$antinuke enable' },
         { name: '$antinuke disable',   aliases: ['an', 'antinukesetup'], permission: 'Administrator', description: 'Disable the antinuke system for this server.',              usage: '$antinuke disable' },
@@ -146,16 +152,12 @@ export const site = {
         { name: '$vanityrole',       aliases: ['vr', 'vanityroles'],                 permission: 'Manage Server',  description: 'Auto-assign roles based on a status/bio keyword or the server tag.', usage: '$vanityrole\n$vanityrole status\n$vanityrole bio\n$vanityrole tag' },
         { name: '$alias',            aliases: [],                                    permission: null,             description: 'Create a personal private shortcut for any command.',             usage: '$alias create <name> <command>\n$alias list\n$alias delete <name>' },
         { name: '$list',             aliases: ['ls'],                                permission: null,             description: 'Paginated list of roles, members, bots, emojis, stickers, channels, or bans.', usage: '$list roles|members|bots|emojis|channels|bans' },
-        { name: '$embed',            aliases: ['embedbuilder', 'eb'],                permission: null,             description: 'Interactive classic-embed builder with live preview, fields, and link buttons.', usage: '$embed' },
-        { name: '$container',        aliases: ['cb', 'containerbuilder', 'build'],   permission: null,             description: 'Interactive CV2 message builder — text, info card, photo grid, quick links.', usage: '$container' },
-        { name: '$webhook',          aliases: ['webhooks', 'wh'],                    permission: 'Manage Webhooks',description: 'Interactive webhook manager — create, send, rename, move, delete.', usage: '$webhook' },
         { name: '$whoping',          aliases: ['wp', 'whoponged'],                   permission: null,             description: 'Show the last 10 messages that directly pinged a user in this channel.', usage: '$whoping [@user]' },
         { name: '$ghostping',        aliases: ['gp', 'ghostpng'],                    permission: 'Administrator',  description: 'Ghost-ping up to 10 users — pings them and instantly deletes the message.', usage: '$ghostping <@user1> [@user2] …' },
         { name: '$vanity',           aliases: [],                                    permission: null,             description: 'Look up a Discord vanity URL — shows if it\'s taken or available.', usage: '$vanity <url>' },
         { name: '$react',            aliases: ['re'],                                permission: null,             description: 'React to a message with an emoji — replies to it, or the previous message.', usage: '$react <emoji name or ID>' },
         { name: '$archive',          aliases: [],                                    permission: 'Manage Messages',description: 'Save recent channel messages to a .txt file sent to your DMs.',   usage: '$archive [amount]' },
         { name: '$firstmessage',     aliases: ['firstmsg'],                          permission: null,             description: 'Get a jump link to the first message ever sent in this channel.',  usage: '$firstmessage' },
-        { name: '$host',             aliases: ['hosting', 'hoster'],                 permission: null,             description: 'Shows where the bot is hosted and other technical details.',       usage: '$host' },
         { name: '$host-image',       aliases: ['hostimage', 'imgbb', 'upload-image'],permission: null,             description: 'Upload an image (attachment or URL) and get back hosted links.',    usage: '$host-image <attachment>\n$host-image <image URL>' },
         { name: '$placeholder-help', aliases: ['placeholders', 'ph', 'phhelp'],      permission: null,             description: 'Paginated reference for all available placeholder tokens.',     usage: '$placeholder-help' },
       ],
@@ -187,14 +189,17 @@ export const site = {
       ],
     },
     {
-      name: 'Welcomer',
-      icon: Bell,
+      name: 'Features',
+      icon: Layers,
       commands: [
         { name: '$greet',                   aliases: ['welcomer', 'welcome'], permission: 'Manage Server', description: 'Show current welcomer configuration for this server.',    usage: '$greet' },
-        { name: '$greet-channel',           aliases: ['gc', 'greet-ch'],      permission: 'Manage Server', description: 'Set or view the channel where welcome messages are sent.', usage: '$greet-channel set <#channel>\n$greet-channel view' },
-        { name: '$greet-message',           aliases: ['gm', 'greet-msg'],     permission: 'Manage Server', description: 'Set the welcome message text or link a saved CV2 payload.', usage: '$greet-message set <text>\n$greet-message data <name>\n$greet-message view' },
-        { name: '$greet-test',              aliases: ['gtest'],               permission: 'Manage Server', description: 'Send a test welcome message as if you just joined.',      usage: '$greet-test' },
-        { name: '$greet-bots',              aliases: ['gbots'],               permission: 'Manage Server', description: 'Toggle whether bot joins trigger the welcome message.',   usage: '$greet-bots on|off' },
+        { name: '$greet channel set',       aliases: ['welcomer', 'welcome'], permission: 'Manage Server', description: 'Set the channel where welcome messages are sent.',        usage: '$greet channel set <#channel>' },
+        { name: '$greet channel remove',    aliases: ['welcomer', 'welcome'], permission: 'Manage Server', description: 'Remove the greet channel — disables welcome messages.',   usage: '$greet channel remove' },
+        { name: '$greet channel view',      aliases: ['welcomer', 'welcome'], permission: 'Manage Server', description: 'View the current greet settings.',                        usage: '$greet channel view' },
+        { name: '$greet message set',       aliases: ['welcomer', 'welcome'], permission: 'Manage Server', description: 'Set the welcome message text, optionally with a saved data payload.', usage: '$greet message set <text> [data: <name>]' },
+        { name: '$greet message remove',    aliases: ['welcomer', 'welcome'], permission: 'Manage Server', description: 'Clear the welcome message.',                               usage: '$greet message remove' },
+        { name: '$greet test',              aliases: ['welcomer', 'welcome'], permission: 'Manage Server', description: 'Send a test welcome message as if you just joined.',      usage: '$greet test' },
+        { name: '$greet bots',              aliases: ['welcomer', 'welcome'], permission: 'Manage Server', description: 'Toggle whether bot joins trigger the welcome message.',   usage: '$greet bots [on|off]' },
         { name: '$birthday',                aliases: ['bday', 'bd'],          permission: null,            description: 'Show server birthday config and your own birthday.',        usage: '$birthday' },
         { name: '$birthday set',            aliases: ['bday', 'bd'],          permission: null,            description: 'Set your birthday — global across all mutual servers.',    usage: '$birthday set <date>' },
         { name: '$birthday unset',          aliases: ['bday', 'bd'],          permission: null,            description: 'Remove your birthday.',                                     usage: '$birthday unset' },
@@ -202,12 +207,6 @@ export const site = {
         { name: '$birthday channel set',    aliases: ['bday', 'bd'],          permission: 'Manage Server', description: 'Set the channel for birthday announcements.',              usage: '$birthday channel set <#channel>' },
         { name: '$birthday channel remove', aliases: ['bday', 'bd'],          permission: 'Manage Server', description: 'Remove the birthday announcement channel.',                usage: '$birthday channel remove' },
         { name: '$birthday message set',    aliases: ['bday', 'bd'],          permission: 'Manage Server', description: 'Set the birthday announcement text or link a saved payload.', usage: '$birthday message set <text>\n$birthday message set data:<name>' },
-      ],
-    },
-    {
-      name: 'Logging',
-      icon: Music2,
-      commands: [
         { name: '$log',         aliases: ['logs', 'logging'], permission: 'Manage Server', description: 'Open the interactive logging config panel or set a category inline.', usage: '$log\n$log <category> <#channel>\n$log <category> enable|disable' },
         { name: '$log channel', aliases: ['logs', 'logging'], permission: 'Manage Server', description: 'Configure logging for channel events (create, delete, update).',      usage: '$log channel <#channel|enable|disable>' },
         { name: '$log member',  aliases: ['logs', 'logging'], permission: 'Manage Server', description: 'Configure logging for member join/leave/update events.',              usage: '$log member <#channel|enable|disable>' },
@@ -216,13 +215,10 @@ export const site = {
         { name: '$log role',    aliases: ['logs', 'logging'], permission: 'Manage Server', description: 'Configure logging for role create/delete/update events.',             usage: '$log role <#channel|enable|disable>' },
         { name: '$log vc',      aliases: ['logs', 'logging'], permission: 'Manage Server', description: 'Configure logging for voice state changes.',                          usage: '$log vc <#channel|enable|disable>' },
         { name: '$log server',  aliases: ['logs', 'logging'], permission: 'Manage Server', description: 'Configure logging for server (guild) update events.',                 usage: '$log server <#channel|enable|disable>' },
-      ],
-    },
-    {
-      name: 'Autoresponder',
-      icon: Bot,
-      commands: [
         { name: '$autoresponder', aliases: ['ares', 'autoresponders'], permission: 'Manage Server', description: 'Create, edit, and manage triggers that auto-reply or react to matching messages.', usage: '$autoresponder\n$autoresponder add <trigger>\n$autoresponder list\n$autoresponder remove <trigger>' },
+        { name: '$embed',     aliases: ['embedbuilder', 'eb'],              permission: null,              description: 'Interactive classic-embed builder with live preview, fields, and link buttons.', usage: '$embed' },
+        { name: '$container', aliases: ['cb', 'containerbuilder', 'build'], permission: null,              description: 'Interactive CV2 message builder — text, info card, photo grid, quick links.', usage: '$container' },
+        { name: '$webhook',   aliases: ['webhooks', 'wh'],                  permission: 'Manage Webhooks', description: 'Interactive webhook manager — create, send, rename, move, delete.', usage: '$webhook' },
       ],
     },
     {
@@ -307,10 +303,15 @@ export const site = {
 // Total command count is derived from the actual command list above —
 // never hand-edit `botConfig.commandCount`, it's overwritten here so every
 // page (hero stats, footer, about, commands header) always agrees.
-botConfig.commandCount = site.commandCategories.reduce(
-  (sum, cat) => sum + cat.commands.length,
-  0,
-);
+//
+// Rows above list every subcommand/usage variant separately for
+// documentation purposes (e.g. `$antinuke status`, `$antinuke enable`, ...
+// all live under one `$antinuke` command). The count must dedupe by the
+// base command name so it matches the bot's own command total (each
+// command *file*, not each documented subcommand row).
+botConfig.commandCount = new Set(
+  site.commandCategories.flatMap((cat) => cat.commands.map((cmd) => cmd.name.split(' ')[0])),
+).size;
 
 export type CommandCategory = (typeof site.commandCategories)[number];
 export type Command = CommandCategory['commands'][number];
